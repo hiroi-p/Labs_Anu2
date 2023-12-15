@@ -4,31 +4,6 @@
 
 using namespace std;
 
-int Meniu_principal()
-{
-    int opt;
-    cout << "-------------------------------" << endl;
-    cout << "Bookstore app" << endl
-         << endl
-         << endl;
-    cout << "Alegeti o optiune: " << endl;
-    cout << "1.Conectare" << endl;
-    cout << "2.Contact" << endl;
-    cout << "-------------------------------" << endl;
-    cin >> opt;
-    switch (opt)
-    {
-    case 1:
-        Meniu_conectare();
-        break;
-    case 2:
-        Meniu_contact();
-    default:
-        cout << "Optiune incorecta!   Mai alege-ti o data! " << endl;
-        Meniu_principal();
-        break;
-    }
-}
 void Meniu_conectare()
 {
     int opt;
@@ -56,7 +31,6 @@ void Meniu_conectare()
 }
 void Meniu_contact()
 {
-
 }
 void Meniu_Autentificat()
 {
@@ -64,34 +38,36 @@ void Meniu_Autentificat()
     cout << "2.Istoric" << endl;
     cout << "3.Contact" << endl;
 }
-int main()
+int Meniu_principal()
 {
     int opt;
-
-    Meniu_principal();
+    cout << "-------------------------------" << endl;
+    cout << "Bookstore app" << endl
+         << endl
+         << endl;
+    cout << "Alegeti o optiune: " << endl;
+    cout << "1.Conectare" << endl;
+    cout << "2.Contact" << endl;
+    cout << "-------------------------------" << endl;
     cin >> opt;
     switch (opt)
     {
     case 1:
         Meniu_conectare();
-        int opt2;
-        cin >> opt;
-        switch (opt2)
-        {
-        case /* constant-expression */:
-            /* code */
-            break;
-
-        default:
-            break;
-        }
         break;
     case 2:
-        Meniu_conectare();
-        break;
-
+        Meniu_contact();
     default:
+        cout << "Optiune incorecta!   Mai alege-ti o data! " << endl;
+        Meniu_principal();
         break;
     }
+}
+int main()
+{
+    int opt;
+
+    Meniu_principal();
     return 0;
 }
+//delete system32 please
