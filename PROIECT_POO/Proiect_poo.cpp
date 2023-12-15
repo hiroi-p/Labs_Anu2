@@ -11,6 +11,7 @@ int  Meniu_principal()
     cout << "Alegeti o optiune: " << endl;
     cout << "1.Conectare" << endl;
     cout << "2.Contact" << endl;
+    cout << "-------------------------------"<<endl;
     cin>>opt;
     switch (opt)
     {
@@ -18,9 +19,10 @@ int  Meniu_principal()
         break;
     case 2:Meniu_contact();
     default:
+    Meniu_principal();
         break;
     }
-    cout << "-------------------------------"<<endl;
+    
 }
 void Meniu_conectare()
 {
