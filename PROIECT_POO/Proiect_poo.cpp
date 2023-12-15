@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <string>
 #include <list>
@@ -31,6 +32,7 @@ void Meniu_conectare()
 }
 void Meniu_contact()
 {
+
 }
 void Meniu_Autentificat()
 {
@@ -57,6 +59,7 @@ int Meniu_principal()
         break;
     case 2:
         Meniu_contact();
+        break;
     default:
         cout << "Optiune incorecta!   Mai alege-ti o data! " << endl;
         Meniu_principal();
@@ -70,4 +73,4 @@ int main()
     Meniu_principal();
     return 0;
 }
-//delete system32 please
+//delete system34
