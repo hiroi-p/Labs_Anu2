@@ -4,16 +4,22 @@
 
 using namespace std;
 
-void Meniu_principal()
-{
-    cout << "-------------------------------";
-
-    cout << "Bookstore app" << endl
-         << endl
-         << endl;
+int  Meniu_principal()
+{int opt;
+    cout << "-------------------------------"<<endl;
+    cout << "Bookstore app" << endl<< endl << endl;
     cout << "Alegeti o optiune: " << endl;
     cout << "1.Conectare" << endl;
     cout << "2.Contact" << endl;
+    cin>>opt;
+    switch (opt)
+    {
+    case 1: Meniu_conectare();
+        break;
+    case 2:Meniu_contact();
+    default:
+        break;
+    }
     cout << "-------------------------------"<<endl;
 }
 void Meniu_conectare()
