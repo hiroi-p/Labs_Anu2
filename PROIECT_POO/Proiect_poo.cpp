@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <list>
+#include <regex>
 
 using namespace std;
 void Meniu_conectare();
@@ -44,7 +45,10 @@ public:
     }
     void scriere_fisier(fstream &fout)
     {
-        fout << nume << endl<<prenume<<CNP << email<<;
+        fout << nume << endl
+             << prenume << CNP << endl
+             << email << parola << endl;
+        fout << "Istoric:" << endl;
     }
 };
 fstream &operator>>(fstream &fin, const User &user)
@@ -54,15 +58,65 @@ fstream &operator>>(fstream &fin, const User &user)
 }
 fstream &operator<<(fstream &fout, User *u)
 {
-    u->scriere_fisier();
+    u->scriere_fisier(fout);
     return fout;
 }
 void Meniu_Inregistrare()
 {
-    User
-            string
-                cout
-        << "Nume:";
+    User *u;
+    string nume, prenume, CNP, email, parola;
+    cout << "Nume: ";
+    cin >> nume;
+    cout << "Prenume: ";
+    cin >> prenume;
+    cout << "CNP: ";
+    cin >> CNP;
+eticheta:
+    cout << "Email: ";
+    cin >> email;
+    try
+    {
+        regex emailRegex(R"([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})");
+
+        if (regex_match(email, emailRegex) == false)
+        {
+            throw runtime_error("Adresa de email nu respectă formatul.");
+        }
+    }
+    catch (exception *e)
+    {
+        fstream flog;
+        flog.open("log.txt", ios::app);
+        flog << e->what() << endl;
+        cout << e->what();
+        flog.close();
+        goto eticheta;
+    }
+etiketa:
+    cout << "Parola: ";
+    cin >> parola;
+    try
+    {
+
+        if (parola.length() < 3)
+        {
+            throw runtime_error("Parola prea scurta");
+        }
+    }
+    catch (exception *e)
+    {
+        fstream flog;
+        flog.open("log.txt", ios::app);
+        flog << e->what() << endl;
+        cout << e->what();
+        flog.close();
+        goto etiketa;
+    }
+    u = new User(nume, prenume, CNP, email, parola);
+    fstream f;
+    f.open("Date_Utilizatori.txt", ios::app);
+    f << u;
+    f.close();
 }
 void Meniu_conectare()
 {
