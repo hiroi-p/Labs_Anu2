@@ -13,12 +13,23 @@ void Meniu_Rezervare();
 void Meniu_Istoric();
 void Meniu_Autentificare();
 void Meniu_Inregistrare();
-
+//Optiune folosim toate datele unui utilizator pe o linie(si impartim cu strtok). "anal"_fabet 
+class Istoric
+{
+private:
+    list<string> *tranzactii;
+    int suma_totala;
+    public:
+    void adaugare(string tranzactie,int suma){
+        tranzactii->push_back(tranzactie);
+        suma_totala=suma_totala+suma;
+    }
+};
 class User
 {
 private:
     string nume, prenume, CNP, email, parola;
-
+     Istoric *ist;
 public:
     User(string nume, string prenume, string CNP, string email, string parola)
     {
@@ -27,6 +38,10 @@ public:
         this->nume = nume;
         this->parola = parola;
         this->prenume = prenume;
+        ist=new Istoric;
+    }
+    void adaugaree(string tranzactie,int suma){
+        ist->adaugare(tranzactie,suma);
     }
     void afisare()
     {
@@ -34,6 +49,7 @@ public:
         cout << "Prenume:" << prenume << endl;
         cout << "CNP:" << CNP << endl;
         cout << "Email:" << email << endl;
+
     }
     string getNume()
     {
@@ -53,15 +69,27 @@ public:
         fout << "Istoric:" << endl;
     }
 };
-fstream &operator>>(fstream &fin, const User &user)
+fstream &operator>>(fstream &fin, User *u)
 {
-
+    string nume, prenume, CNP, email, parola;
+    fin >> nume >> prenume;
+    u = new User(nume, prenume, CNP, email, parola);
     return fin;
 }
 fstream &operator<<(fstream &fout, User *u)
 {
     u->scriere_fisier(fout);
     return fout;
+}
+void citire_lista(list<User*> &lista_Utilizatori)
+{
+    User *u;
+    fstream f;
+	f.open("Date_Utilizatori.txt", ios::in);
+    while (f >> u) {
+		lista_Utilizatori.push_back(u);
+	}
+	f.close();
 }
 void Meniu_Inregistrare()
 {
@@ -119,6 +147,63 @@ etiketa:
     f << u;
     f.close();
 }
+void Meniu_Autentificare()
+{
+    string email, parola,linie;
+    ifstream f("Date_Utilizatori.txt");
+eticheta:
+    try
+    {
+        cout << "Email: ";
+        cin >> email;
+        regex emailRegex(R"([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})");
+        if (regex_match(email, emailRegex) == false)
+        {
+            throw logic_error("Adresa de email nu respecta formatul.");
+        }
+    }
+    catch (logic_error &e)
+    {
+        fstream flog;
+        flog.open("log.txt", ios::app);
+        flog << e.what() << endl;
+        cout << e.what() << endl;
+        flog.close();
+        goto eticheta;
+    }
+etiketa:
+    try
+    {
+
+        cout << "Parola: ";
+        cin >> parola;
+        if (parola.length() < 3)
+        {
+            throw logic_error("Parola prea scurta");
+        }
+    }
+    catch (logic_error &e)
+    {
+        fstream flog;
+        flog.open("log.txt", ios::app);
+        flog << e.what() << endl;
+        cout << e.what() << endl;
+        flog.close();
+        goto etiketa;
+    }
+       while(getline(f,linie)){
+       regex emailRegex(R"([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})");
+        if (regex_match(linie, emailRegex) == true)
+        {
+           if(linie==email){
+            getline(f,linie);
+            if(linie==parola){
+                Meniu_Autentificat(email,parola);
+            }
+           }
+        } 
+    }
+}
 void Meniu_conectare()
 {
     int opt;
@@ -171,7 +256,7 @@ void Meniu_contact()
         }
     }
 }
-void Meniu_Autentificat()
+void Meniu_Autentificat(string email,string parola)
 {
     int opt;
     while (1)
@@ -222,6 +307,9 @@ void Meniu_principal()
 int main()
 {
     int opt;
+    list<User*> lista_Utilizatori;
+    string chestie="adasdasdwq";
+    ofstream f(chestie);
     Meniu_principal();
     return 0;
 }
