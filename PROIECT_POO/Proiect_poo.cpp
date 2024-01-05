@@ -3,8 +3,8 @@
 #include <fstream>
 #include <list>
 #include <regex>
-
 using namespace std;
+
 void Meniu_conectare();
 void Meniu_Autentificat();
 void Meniu_principal();
@@ -46,8 +46,10 @@ public:
     void scriere_fisier(fstream &fout)
     {
         fout << nume << endl
-             << prenume << CNP << endl
-             << email << parola << endl;
+             << prenume << endl
+             << CNP << endl
+             << email << endl
+             << parola << endl;
         fout << "Istoric:" << endl;
     }
 };
@@ -72,43 +74,42 @@ void Meniu_Inregistrare()
     cout << "CNP: ";
     cin >> CNP;
 eticheta:
-    cout << "Email: ";
-    cin >> email;
     try
     {
+        cout << "Email: ";
+        cin >> email;
         regex emailRegex(R"([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})");
-
         if (regex_match(email, emailRegex) == false)
         {
-            throw runtime_error("Adresa de email nu respectă formatul.");
+            throw logic_error("Adresa de email nu respecta formatul.");
         }
     }
-    catch (exception *e)
+    catch (logic_error &e)
     {
         fstream flog;
         flog.open("log.txt", ios::app);
-        flog << e->what() << endl;
-        cout << e->what();
+        flog << e.what() << endl;
+        cout << e.what() << endl;
         flog.close();
         goto eticheta;
     }
 etiketa:
-    cout << "Parola: ";
-    cin >> parola;
     try
     {
 
+        cout << "Parola: ";
+        cin >> parola;
         if (parola.length() < 3)
         {
-            throw runtime_error("Parola prea scurta");
+            throw logic_error("Parola prea scurta");
         }
     }
-    catch (exception *e)
+    catch (logic_error &e)
     {
         fstream flog;
         flog.open("log.txt", ios::app);
-        flog << e->what() << endl;
-        cout << e->what();
+        flog << e.what() << endl;
+        cout << e.what() << endl;
         flog.close();
         goto etiketa;
     }
@@ -131,6 +132,7 @@ void Meniu_conectare()
     switch (opt)
     {
     case 1:
+        Meniu_Inregistrare();
         break;
     case 2:
         break;
@@ -220,7 +222,6 @@ void Meniu_principal()
 int main()
 {
     int opt;
-
     Meniu_principal();
     return 0;
 }
