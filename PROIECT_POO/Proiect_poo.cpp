@@ -5,6 +5,13 @@
 
 using namespace std;
 
+void Meniu_conectare();
+void Meniu_Autentificat();
+void Meniu_principal();
+void Meniu_contact();
+void Meniu_Rezervare();
+void Meniu_Istoric();
+
 void Meniu_conectare()
 {
     int opt;
@@ -24,6 +31,7 @@ void Meniu_conectare()
     case 3:
         break;
     case 4:
+        Meniu_principal();
         break;
     default:
         Meniu_conectare();
@@ -32,15 +40,52 @@ void Meniu_conectare()
 }
 void Meniu_contact()
 {
+    int opt;
+    while (1)
+    {
+        cout << "Suport tehnic" << endl
+             << "In cazul în care întâlniți dificultăți echipa de suport vă va sta la dispoziție." << endl
+             << "Tot ce trebuie să faceți este să completați următorul formular în care trebuie descrisă problema." << endl
+             << "Alegeți o opțiune:" << endl
+             << "     1. Trimitere sesizare" << endl
+             << "     2. Inapoi" << endl
+             << "Optiune: ";
+        cin >> opt;
+        switch (opt)
+        {
+        case 1:
+            break;
+        case 2:
+            break;
 
+        default:
+            break;
+        }
+    }
 }
 void Meniu_Autentificat()
 {
-    cout << "1.Achizitie/Imprumut" << endl;
-    cout << "2.Istoric" << endl;
-    cout << "3.Contact" << endl;
+    int opt;
+    while (1)
+    {
+        cout << "1.Achizitie/Imprumut" << endl;
+        cout << "2.Istoric" << endl;
+        cout << "3.Contact" << endl;
+        cout << "Optiune: ";
+        cin >> opt;
+        switch (opt)
+        {
+        case 1:
+            break;
+        case 2:
+            break;
+
+        default:
+            break;
+        }
+    }
 }
-int Meniu_principal()
+void Meniu_principal()
 {
     int opt;
     cout << "-------------------------------" << endl;
@@ -73,4 +118,3 @@ int main()
     Meniu_principal();
     return 0;
 }
-//delete system34
