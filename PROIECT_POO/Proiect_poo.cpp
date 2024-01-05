@@ -4,7 +4,7 @@
 #include <list>
 #include <regex>
 using namespace std;
-
+//ce simplu era daca foloseam listele de la inceput <3 <3 
 void Meniu_conectare();
 void Meniu_Autentificat();
 void Meniu_principal();
@@ -13,7 +13,8 @@ void Meniu_Rezervare();
 void Meniu_Istoric();
 void Meniu_Autentificare();
 void Meniu_Inregistrare();
-//Optiune folosim toate datele unui utilizator pe o linie(si impartim cu strtok). "anal"_fabet 
+//Optiune folosim toate datele unui utilizator pe o linie(si impartim cu strtok).
+//Putem sa folosim un delimitator la finalul istoricului, ex:linie,spatiu ca sa delimitam userii
 class Istoric
 {
 private:
