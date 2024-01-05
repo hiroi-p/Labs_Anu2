@@ -1,17 +1,69 @@
-
 #include <iostream>
 #include <string>
+#include <fstream>
 #include <list>
 
 using namespace std;
-
 void Meniu_conectare();
 void Meniu_Autentificat();
 void Meniu_principal();
 void Meniu_contact();
 void Meniu_Rezervare();
 void Meniu_Istoric();
+void Meniu_Autentificare();
+void Meniu_Inregistrare();
 
+class User
+{
+private:
+    string nume, prenume, CNP, email, parola;
+
+public:
+    User(string nume, string prenume, string CNP, string email, string parola)
+    {
+        this->CNP = CNP;
+        this->email = email;
+        this->nume = nume;
+        this->parola = parola;
+        this->prenume = prenume;
+    }
+    void afisare()
+    {
+        cout << "Nume:" << nume << endl;
+        cout << "Prenume:" << prenume << endl;
+        cout << "CNP:" << CNP << endl;
+        cout << "Email:" << email << endl;
+    }
+    string getNume()
+    {
+        return nume;
+    }
+    string getPrenume()
+    {
+        return prenume;
+    }
+    void scriere_fisier(fstream &fout)
+    {
+        fout << nume << endl<<prenume<<CNP << email<<;
+    }
+};
+fstream &operator>>(fstream &fin, const User &user)
+{
+
+    return fin;
+}
+fstream &operator<<(fstream &fout, User *u)
+{
+    u->scriere_fisier();
+    return fout;
+}
+void Meniu_Inregistrare()
+{
+    User
+            string
+                cout
+        << "Nume:";
+}
 void Meniu_conectare()
 {
     int opt;
@@ -56,8 +108,8 @@ void Meniu_contact()
         case 1:
             break;
         case 2:
+            Meniu_principal();
             break;
-
         default:
             break;
         }
