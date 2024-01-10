@@ -199,7 +199,6 @@ etiketa:
            if(linie==email){
             getline(f,linie);
             if(linie==parola){
-                Meniu_Autentificat(email,parola);
             }
            }
         } 
